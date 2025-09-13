@@ -1,0 +1,10 @@
+# Documentação do Projeto
+
+Clique em cada um dos links abaixo para acessar o artefato específico.
+
+1. [Documento de visão](visao/doc-visao.md)
+2. [Protótipos de interface com o usuário](prototipos/prototipos.md)
+3. [Modelo de Domínio](dominio/dominio.md)
+4. [Modelo de casos de uso](cdu/cdu.md)
+5. [Diagrama ER](bd/er.md)
+6. [Diagrama Relacional](bd/bd_relacional.md)
