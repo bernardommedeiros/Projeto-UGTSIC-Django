@@ -1,0 +1,55 @@
+Table user {
+  id uuid [pk, unique, not null]
+  name varchar [not null]
+  email varchar [not null]
+  password varchar [not null]
+}
+
+Table candidate {
+  user_id uuid [ref: > user.id, not null]
+}
+
+Table rh {
+  user_id uuid [ref: > user.id, not null]
+}
+
+Enum EducationLevel {
+  EnsinoMedioIncompleto
+  EnsinoMedioCompleto
+  EnsinoSuperiorIncompleto
+  EnsinoSuperiorCompleto
+}
+
+Table cvform {
+  id uuid [pk, unique, not null]
+  candidate_id uuid [ref: > candidate.user_id, not null]
+  name varchar [not null]
+  education EducationLevel [not null]
+  desired_position text [not null]
+  observation text [default: '']
+  cv_file varchar [not null]
+}
+
+Table cvapproval {
+  id uuid [pk, unique, not null]
+  rh_id uuid [ref: > rh.user_id, not null]
+  cv_form_id uuid [ref: > cvform.id, not null]
+  approved boolean [not null]
+  created_at timestamp [default: `now()`, not null]
+}
+
+Table notification {
+  id uuid [pk, unique, not null]
+  user_id uuid [ref: > user.id, not null]
+  message text [not null]
+  created_at timestamp [default: `now()`, not null]
+}
+
+Table emailsystem {
+  id uuid [pk, unique, not null]
+  cv_form_id uuid [ref: > cvform.id, not null]
+  to_email varchar [not null]
+  subject varchar [not null]
+  body text [not null]
+  sent_at timestamp [default: `now()`, not null]
+}
