@@ -1,0 +1,67 @@
+erdiagram Dependente
+
+notation=chen
+
+entity User{
+    id key
+    name
+    email
+    password
+}
+
+entity Candidate{
+    user_id key
+}
+
+entity RH{
+    user_id key
+}
+
+relationship CandidateUser {
+    User[1] -> Candidate[0..N]
+}
+
+relationship RHUser {
+    User[1] -> RH[1]
+}
+
+relationship RHAnalysis {
+    RH[1] -> ApprovedCVs[0..N]
+}
+
+relationship CVFeedback {
+    ApprovedCVs[0..1] -> CVFORM[1]
+}
+
+entity CVFORM {
+    id key
+    candidate_user_id
+    email
+    phone
+    education
+    observation
+    cv_file
+}
+
+relationship CandidateCV {
+    Candidate[1] -> CVFORM[0..1]
+}
+
+entity ApprovedCVs {
+    id key
+    cv_id
+    rh_id
+    isApproved
+    time
+}
+
+entity Notification {
+    id key
+    candidate_user_id
+    message
+    time
+}
+
+relationship CandidateNotification {
+    Candidate[1] -> Notification[0..N]
+}

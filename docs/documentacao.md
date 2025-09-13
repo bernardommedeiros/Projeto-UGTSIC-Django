@@ -6,5 +6,4 @@ Clique em cada um dos links abaixo para acessar o artefato específico.
 2. [Protótipos de interface com o usuário](prototipos/prototipos.md)
 3. [Modelo de Domínio](dominio/dominio.md)
 4. [Modelo de casos de uso](cdu/cdu.md)
-5. [Diagrama ER](bd/er.md)
-6. [Diagrama Relacional](bd/bd_relacional.md)
+5. [Modelo DB](db/db.md)
