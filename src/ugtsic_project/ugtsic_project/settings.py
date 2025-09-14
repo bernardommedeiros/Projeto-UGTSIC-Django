@@ -17,8 +17,9 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_ROOT = '/data/web/static'
-MEDIA_ROOT = '/data/web/media'
 
+MEDIA_ROOT = '/data/web/media'
+MEDIA_URL = '/media/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cv_hub',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
