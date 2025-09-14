@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.conf import settings
 
 class CV(models.Model):
     EDUCATION = [
@@ -9,10 +10,10 @@ class CV(models.Model):
         ('Ensino Superior(Incompleto)', 'Ensino Superior(Incompleto)'),
         ('Ensino Superior(Completo)', 'Ensino Superior(Completo)'),
     ]
-    user_id = models.ForeignKey(AbstractUser, on_delete=models.CASCADE, related_name='candidate_cv')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='candidate_cv')
     email = models.EmailField()
     phone = models.CharField(max_length=20)
-    education_level = models.CharField(max_length=20, choices=EDUCATION)
+    education_level = models.CharField(max_length=30, choices=EDUCATION)
     observations = models.TextField(blank=True, null=True)
     cv_file = models.FileField(
         upload_to='cvs/',
@@ -24,7 +25,6 @@ class CV(models.Model):
     class Meta:
         verbose_name = "Currículo"
         verbose_name_plural = "Currículos"
-        ordering = ['-created_at']
         
     def clean(self):
         errors = {}
