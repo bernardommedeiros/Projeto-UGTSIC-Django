@@ -54,11 +54,11 @@
 | ------- | --------- | ------------ | ------- | ---- | -- | -- | ------ | -------- | ------- |
 | id | chave primária | UUID |  | &#9744;  | &#9745; | &#9744; | &#9745; | &#9745; |  |  | 
 | candidate_id | chave estrangeira, Id do candidato | UUID |  | &#9744;  | &#9744; | &#9745; | &#9745; | &#9744; |  | 
-| email | Email para contato | varchar | 255 | &#9744;  | &#9744; | &#9745; | &#9744; | &#9744; |  |  
-| phone | Telefone para contato | UUID | 20 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | 
+| email | Email para contato | Varchar | 255 | &#9744;  | &#9744; | &#9745; | &#9744; | &#9744; |  |  
+| phone | Telefone para contato | Varchar | 20 | &#9744;  | &#9744; | &#9745; | &#9744; | &#9744; |  | 
 | education | Formação acadêmica | ENUM |  | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | 
 | observation | Observações do candidato | 255 |  | &#9745;  | &#9744; | &#9744; | &#9744; | &#9744; |  | 
-| desired_position | Cargo desejado | UUID | 25 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | 
+| desired_position | Cargo desejado | Varchar | 25 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | 
 | created_at | Data de criação | Timestamp | | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; | `now()` |  
 
 --- 
