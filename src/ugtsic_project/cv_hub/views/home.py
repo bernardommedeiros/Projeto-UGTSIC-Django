@@ -6,5 +6,5 @@ from ..models.cv import CV
 
 class HomePageView(LoginRequiredMixin, View):
     def get(self, request):
-        cvs = service.show_cv()
-        return render(request, 'cv_hub/home_page.html', {'cvs': cvs})
+        cv = service.show_cv()
+        return render(request, 'cv_hub/home_page.html', {'cv': cv})

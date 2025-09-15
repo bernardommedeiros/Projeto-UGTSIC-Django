@@ -17,6 +17,9 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_ROOT = '/data/web/static'
+STATIC_URL = '/static/'
+
+
 
 MEDIA_ROOT = '/data/web/media'
 MEDIA_URL = '/media/'
