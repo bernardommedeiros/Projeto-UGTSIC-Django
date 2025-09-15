@@ -11,6 +11,7 @@ class CV(models.Model):
         ('Ensino Superior(Completo)', 'Ensino Superior(Completo)'),
     ]
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='candidate_cv')
+    full_name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=20)
     education_level = models.CharField(max_length=30, choices=EDUCATION)
