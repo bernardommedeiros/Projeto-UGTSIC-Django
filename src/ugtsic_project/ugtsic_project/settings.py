@@ -139,3 +139,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# DEV ONLY
+codespace_name = os.getenv("CODESPACE_NAME")
+codespace_domain = os.getenv("GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN")
+CSRF_TRUSTED_ORIGINS = [f'https://{codespace_name}-3333.{codespace_domain}','https://localhost:3333', 'https://172.0.0.1:3333']
+
