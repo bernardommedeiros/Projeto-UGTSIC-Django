@@ -30,10 +30,20 @@ RUN python -m venv /venv && \
   chmod -R 755 /data/web/media && \
   chmod +x /scripts/commands.sh && \
   apt-get update && \
-  apt-get install -y bash postgresql-client
+  apt-get install -y bash postgresql-client \
+  #  WeasyPrint dependencies
+  libpango-1.0-0 \
+  libcairo2 \
+  libpangoft2-1.0-0 \
+  libpangocairo-1.0-0 \
+  libgdk-pixbuf2.0-0 \
+  libffi-dev \
+  shared-mime-info \
+  && rm -rf /var/lib/apt/lists/*
+
+
+
 
 ENV PATH="/scripts:/venv/bin:$PATH"
-
-USER duser
 
 CMD ["bash", "commands.sh"]

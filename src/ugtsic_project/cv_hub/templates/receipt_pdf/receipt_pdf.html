@@ -1,0 +1,16 @@
+{% extends 'style_base/style_base.html' %}
+{% block content %}
+    <h1>Comprovante de registro</h1>
+    <p>Aqui esta o documento que indica sua inscrição:</p>
+    <ul>
+        <li><strong>Nome Completo:</strong> {{ cv.full_name }}</li>
+        <li><strong>E-mail:</strong> {{ cv.email }}</li>
+        <li><strong>Telefone:</strong> {{ cv.phone }}</li>
+        <li><strong>Escolaridade:</strong> {{ cv.education }}</li>
+        <li><strong>Cargo Desejado:</strong> {{ cv.desired_position }}</li>
+        <li><strong>Observações:</strong> {{ cv.observations }}</li>
+        <li><strong>Endereço IP:</strong> {{ cv.ip_address }}</li>
+    </ul>
+    <br>
+    <p>Seu currículo foi recebido com sucesso.</p>
+{% endblock content %}
