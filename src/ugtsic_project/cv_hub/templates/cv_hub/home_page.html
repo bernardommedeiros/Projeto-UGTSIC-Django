@@ -1,0 +1,36 @@
+{% extends 'style_base/style_base.html' %}
+{% block content %}
+
+<section class="section">
+  <div class="container">
+   
+      <h1 class="title is-2 has-text-centered has-text-weight-semibold">UGTSIC - CV HUB</h1>
+
+    {% if user.is_authenticated %}
+  <p class="mt-4 ml-4 is-size-6 has-text-weight-medium has-text-centered">
+    Olá, {{ user.username }}! verifique seu currículo abaixo:
+    
+  </p>
+{% else %}
+  <div class="mt-4 ml-4">
+    <a href="{% url 'login' %}" class="button is-link">Login</a>
+  </div>
+{% endif %}
+
+
+    <div class="has-text-centered mt-6 mb-5">
+      
+    </div>
+
+    {% if cv %}
+      <div class="columns is-multiline">
+        {% for item in cv %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="has-text-centered mt-5">Nenhum cv cadastrado.</p>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}
