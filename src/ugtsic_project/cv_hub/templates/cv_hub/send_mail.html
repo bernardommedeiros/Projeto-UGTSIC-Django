@@ -1,0 +1,13 @@
+{% extends 'style_base/style_base.html' %}
+{% block content %}
+<head>
+    <title>Enviar E-mail</title>
+</head>
+<body>
+    <h1>Enviar e-mail de teste</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Enviar E-mail</button>
+    </form>
+</body>
+{% endblock %}
