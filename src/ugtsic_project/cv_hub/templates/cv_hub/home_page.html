@@ -1,0 +1,116 @@
+{% extends 'style_base/style_base.html' %}
+{% block content %}
+
+<section class="section">
+  <div class="container">
+
+    <h1 class="title is-2 has-text-centered has-text-weight-semibold">
+      UGTSIC - CV HUB
+    </h1>
+    <a href="{% url 'logout' %}">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg>
+    </a>
+    {% if user.is_superuser %}
+      <h2 class="subtitle has-text-centered">Painel Administrativo - Análise todos os candidatos</h2>
+
+      {% if cvs %}
+        <div class="columns is-multiline">
+          {% for cv in cvs %}
+            <div class="column is-4">
+              <div class="card has-shadow">
+                <div class="card-content">
+                  <p class="title is-4 has-text-link">{{ cv.full_name }}</p>
+                  <p class="subtitle is-6 has-text-grey">Criado em {{ cv.created_at|date:"d/m/Y - H:i" }}</p>
+                  <p class="subtitle is-6 has-text-grey">E-mail: {{ cv.email }}</p>
+                  <p class="subtitle is-6 has-text-grey">Telefone: {{ cv.phone }}</p>
+                  <p class="subtitle is-6 has-text-grey">Escolaridade: {{ cv.education_level }}</p>
+                  <p class="subtitle is-6 has-text-grey">Cargo Desejado: {{ cv.desired_position }}</p>
+                  <div class="content">{{ cv.observations|linebreaksbr }}</div>
+                  <a href="{{ cv.cv_file.url }}" class="button is-link is-light" target="_blank">Ver Currículo</a>
+                  <a class="button is-medium is-link mt-2" href="{% url 'receipt' cv.id %}">Recibo de inscrição</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="has-text-centered mt-5">Nenhum CV cadastrado.</p>
+      {% endif %}
+    {% endif %}
+
+    {% if not user.is_superuser %}
+    {% if user.is_authenticated %}
+      <p class="mt-4 ml-4 is-size-6 has-text-weight-medium has-text-centered">
+        Olá, {{ user.username }}! Verifique seu currículo abaixo:
+      </p>
+    {% else %}
+      <div class="mt-4 ml-4">
+        <a href="{% url 'login' %}" class="button is-link">Login</a>
+      </div>
+    {% endif %}
+
+    <div class="has-text-centered mt-6 mb-5">
+      {% if not cv %}
+        <a class="button is-medium is-link" href="{% url 'cv_create' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+          Crie seu Currículo
+        </a>
+      {% endif %}
+    </div>
+
+    {% if cv %}
+      <div class="columns is-multiline">
+          <div class="column is-4">
+            <a href="{%  url 'cv_update'  %}">
+            <div class="card has-shadow">
+              <div class="card-content">
+
+                <p class="title is-4 has-text-link">{{ cv.full_name }}</p>
+                <p class="subtitle is-6 has-text-grey">
+                  Criado em {{ cv.created_at|date:"d/m/Y - H:i" }}
+                </p>
+                <p class="subtitle is-6 has-text-grey">
+                  E-mail: {{ cv.email }}
+                </p>
+                <p class="subtitle is-6 has-text-grey">
+                  Telefone: {{ cv.phone }}
+                </p>
+                <p class="subtitle is-6 has-text-grey">
+                  Escolaridade: {{ cv.education_level }}
+                </p>
+                <p class="subtitle is-6 has-text-grey">
+                  Cargo Desejado: {{ cv.desired_position }}
+                </p>
+                <div class="content">
+                  {{ cv.observations|linebreaksbr }}
+                </div>
+                <a href="{{ cv.cv_file.url }}" class="button is-link is-light" target="_blank" rel="noopener noreferrer">
+
+                  Ver Currículo
+                </a>
+              </div>
+            </div>
+            </a>
+          </div>
+
+      </div>
+    {% else %}
+      <p class="has-text-centered mt-5">Nenhum CV cadastrado.</p>
+    {% endif %}
+
+  </div>
+
+  <div class="has-text-centered mt-6 mb-5">
+    {% if cv %}
+      <a class="button is-medium is-link" href="{% url 'receipt' cv.id %}">Recibo</a>
+    {% else %}
+      <span class="button is-medium is-disabled">Sem recibo</span>
+    {% endif %}
+  </div> 
+  {% endif %}
+
+</section>
+
+{% endblock %}
