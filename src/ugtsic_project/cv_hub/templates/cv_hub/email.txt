@@ -1,0 +1,9 @@
+Detalhes do Currículo
+    Nome Completo: {{ cv.full_name }}
+    E-mail: {{ cv.email }}
+    Telefone: {{ cv.phone }}
+    Escolaridade: {{ cv.education_level }}
+    Cargo Desejado: {{ cv.desired_position }}
+    Observações: {{ cv.observations }}
+    Endereço IP: {{ cv.ip_address }}
+Arquivo do currículo anexado
