@@ -1,13 +1,39 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %} UGTSIC CV HUB {% endblock %}</title>
+    <title>{% block title %} SKillUp HUB {% endblock %}</title>
     <!-- ALOCA ESTILIZADOR SEM PRECISAR BAIXAR NODEMODULES, APENAS VIA CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 </head>
 <body>
-  
+  {% block header %}
+  <header>
+    <nav class="navbar is-link" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item has-text-weight-bold is-size-4" href="{% url 'home_page' %}">
+          SkillUp - CV Hub 
+        </a>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <a href="{% url 'logout' %}" class="button is-light">
+            <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg>
+            </span>
+            <span>Sair</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  {% endblock header %}
+
+  <main>
     {% block content %}
+
     {% endblock content %}
+  </main>
+
+
 </body>
 </html>

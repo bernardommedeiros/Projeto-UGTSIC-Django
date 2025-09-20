@@ -1,6 +1,6 @@
 {% extends 'style_base/style_base.html' %}
 {% block content %}
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" class="box">
         {% csrf_token %}
         <label for="full_name">Nome completo:</label>
         <input type="text" name="full_name" required><br>
