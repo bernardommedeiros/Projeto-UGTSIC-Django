@@ -40,7 +40,7 @@
       {% if user.is_authenticated and not user.is_superuser %}
       <div class="columns is-variable is-6 is-vcentered is-align-items-stretch">
 
-        <div class="column is-fullheight">
+        <div class="column">
           <div class="card has-shadow">
             <div class="card-content">
               <p class="title is-4 ">Olá, {{ user.username }}! </p>
@@ -49,7 +49,7 @@
           </div>
         </div>
 
-        <div class="column is-fullheight">
+        <div class="column has-text-centered">
           {% if not cv %}
             <a class="button is-medium is-link" href="{% url 'cv_create' %}">
               <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus">
@@ -60,7 +60,7 @@
         {% else %}
 
               <a href="{%  url 'cv_update'  %}">
-              <div class="card is-hoverable has-shadow">
+              <div class="card is-hoverable has-shadow has-text-left">
                 <div class="card-content">
                     <p class="title is-4 has-text-link">{{ cv.full_name }}</p>
                     <p class="subtitle is-6 has-text-grey">
@@ -91,7 +91,7 @@
         {% endif %}
         </div>
       
-    <div class="column is-fullheight has-text-black-is-centered">
+    <div class="column has-text-black-is-centered">
       <div class="card has-shadow">
         <div class="card-content">
           <h2 class="title is-4">Comprovante de Inscrição</h2>
