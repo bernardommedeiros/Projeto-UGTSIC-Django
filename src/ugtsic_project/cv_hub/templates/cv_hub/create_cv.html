@@ -1,35 +1,85 @@
 {% extends 'style_base/style_base.html' %}
 {% block content %}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label for="full_name">Nome completo:</label>
-        <input type="text" name="full_name" required><br>
+    <section class="section">
+        <div class="container mt-5">
+            <div class="columns is-centered is-2">
+                <div class="column is-8-tablet is-6-desktop is-5-widescreen">
+                    <form method="post" enctype="multipart/form-data" class="box">
+                        {% csrf_token %}
+                        <h1 class="title is-3 has-text-centered"> Crie seu currículo </h1>
+                        
+                        <div class="field">
+                            <label class="label" for="full_name">Nome completo:</label>
+                            <div class="control"> <input class="input" type="text" name="full_name" required></div>
+                        </div>
 
-        <label for="email">E-mail:</label>
-        <input type="email"name="email" required><br>
+                        <div class="field">
+                            <label class="label" for="email">E-mail:</label>
+                            <div class="control"> <input class="input" type="email"name="email" required></div>
+                        </div>
 
-        <label for="phone">Telefone:</label>
-        <input type="text" name="phone" required><br>
+                        <div class="field">
+                            <label class="label" for="phone">Telefone:</label>
+                            <div class="control"> <input class="input" type="text" name="phone" required> </div>
+                        </div>
 
-        <label for="education">Escolaridade:</label>
-        <select name="education" required>
-            <option value="Ensino Médio(Incompleto)">Ensino Médio (Incompleto)</option>
-            <option value="Ensino Médio(Completo)">Ensino Médio (Completo)</option>
-            <option value="Ensino Superior(Incompleto)">Ensino Superior (Incompleto)</option>
-            <option value="Ensino Superior(Completo)">Ensino Superior (Completo)</option>
-        </select><br>
+                        <div class="field">
+                            <label class="label" for="desired_position">Cargo Desejado:</label>
+                            <div class="control"> <input class="input" type="text" name="desired_position" required> </div>
+                        </div>
+                        
 
-        <label for="desired_position">Cargo Desejado:</label>
-        <input type="text" name="desired_position" required><br>
+                        <div class="field">
+                            <label class="label" for="education">Escolaridade:</label>
+                            <div class="control">
+                                <div class="select is-fullwidth">
+                                    <select class="select is-fullwidth" name="education" required>
+                                        <option value="Ensino Médio(Incompleto)">Ensino Médio (Incompleto)</option>
+                                        <option value="Ensino Médio(Completo)">Ensino Médio (Completo)</option>
+                                        <option value="Ensino Superior(Incompleto)">Ensino Superior (Incompleto)</option>
+                                    <option value="Ensino Superior(Completo)">Ensino Superior (Completo)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
-        <label for="observations">Observações:</label>
-        <textarea name="observations"></textarea><br>
+                       <div class="field">
+                        <label class="label" for="cv_file">Arquivo do CV:</label>
+                        <div class="control">
+                            <div class="file has-name is-fullwidth">
+                            <label class="file-label">
+                                <input class="file-input" type="file" name="cv_file" id="cv_file" accept=".pdf,.doc,.docx" required>
+                                <span class="file-cta">
+                                <span class="file-label">
+                                    Escolher arquivo…
+                                </span>
+                                </span>
+                                <span class="file-name" aria-live="polite">
+                                Nenhum arquivo selecionado
+                                </span>
+                            </label>
+                            </div>
+                        </div>
+                        </div>
 
-        <label for="cv_file">Arquivo do CV:</label>
-        <input type="file" name="cv_file" accept=".pdf,.doc,.docx" required><br>
 
-        <input type="hidden" name="ip_address" value="{{ ip_address }}">
+                        <div class="field mt-2">
+                            <label class="label" for="observations">Observações:</label>
+                                <div class="control">
+                                    <textarea class="textarea is-small" name="observations" placeholder="Digite suas observações"></textarea>
+                                </div>
+                        </div>
 
-        <button type="submit">Enviar</button>
-    </form>
+                        <input type="hidden" name="ip_address" value="{{ ip_address }}">
+
+
+                        <div class="field is-grouped is-grouped-right mt-3">
+                            <div class="control">
+                                <button type="submit" class="button is-link is-medium">Enviar</button>
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+    </section>
 {% endblock content %}
