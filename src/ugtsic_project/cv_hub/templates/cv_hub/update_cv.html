@@ -1,36 +1,61 @@
 {% extends 'style_base/style_base.html' %}
 {% block content %}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label for="full_name">Nome completo:</label>
-        <input type="text" name="full_name" value="{{ cv.full_name }}" required><br>
+    <section class="section">
+        <div class="container mt-5">
+            <div class="columns is-centered is-2">
+                <div class="column is-8-tablet is-6-desktop is-5-widescreen">
+                    <form method="post" enctype="multipart/form-data" class="box">
+                        {% csrf_token %}
+                        <h1 class="title is-3 has-text-centered"> Atualize seu currículo </h1>
+                        <div class="field">
+                            <label class="label" for="full_name">Nome completo:</label>
+                            <div class="control"><input class="input" type="text" name="full_name" value="{{ cv.full_name }}" required><br></div>
+                        </div>
+                        <div class="field">
+                            <label class="label" for="email">E-mail:</label>
+                            <div class="control"><input class="input" type="email"name="email" value="{{ cv.email }}" required></div>
+                        </div>
 
-        <label for="email">E-mail:</label>
-        <input type="email"name="email" value="{{ cv.email }}" required><br>
+                        <div class="field">
+                            <label class="label" for="phone">Telefone:</label>
+                            <div class="control"><input class="input" type="text" name="phone" value="{{ cv.phone }}" required></div>
+                        </div>
 
-        <label for="phone">Telefone:</label>
-        <input type="text" name="phone" value="{{ cv.phone }}" required><br>
+                        <label class="label" for="desired_position">Cargo Desejado:</label>
+                        <input class="input" type="text" name="desired_position" value="{{ cv.desired_position }}" required><br>
 
-        <label for="education">Escolaridade:</label>
-        <select name="education" required>
-            <option value="Ensino Médio(Incompleto)" {% if cv.education_level == "Ensino Médio(Incompleto)" %}selected{% endif %}>Ensino Médio (Incompleto)</option>
-            <option value="Ensino Médio(Completo)" {% if cv.education_level == "Ensino Médio(Completo)" %}selected{% endif %}>Ensino Médio (Completo)</option>
-            <option value="Ensino Superior(Incompleto)" {% if cv.education_level == "Ensino Superior(Incompleto)" %}selected{% endif %}>Ensino Superior (Incompleto)</option>
-            <option value="Ensino Superior(Completo)" {% if cv.education_level == "Ensino Superior(Completo)" %}selected{% endif %}>Ensino Superior (Completo)</option>
-        </select><br>
+                        <div class="field">
+                            <label class="label" for="education">Escolaridade:</label>
+                            <div class="control">
+                                <div class="select is-fullwidth">
+                                    <select name="education" required>
+                                        <option value="Ensino Médio(Incompleto)" {% if cv.education_level == "Ensino Médio(Incompleto)" %}selected{% endif %}>Ensino Médio (Incompleto)</option>
+                                        <option value="Ensino Médio(Completo)" {% if cv.education_level == "Ensino Médio(Completo)" %}selected{% endif %}>Ensino Médio (Completo)</option>
+                                        <option value="Ensino Superior(Incompleto)" {% if cv.education_level == "Ensino Superior(Incompleto)" %}selected{% endif %}>Ensino Superior (Incompleto)</option>
+                                        <option value="Ensino Superior(Completo)" {% if cv.education_level == "Ensino Superior(Completo)" %}selected{% endif %}>Ensino Superior (Completo)</option>
+                                    </select>
+                                </div>
+                            </div>
+                          
+                          <label for="cv_file">Arquivo do CV:</label>
+                          <input type="file" name="cv_file" accept=".pdf,.doc,.docx"><br>
 
-        <label for="desired_position">Cargo Desejado:</label>
-        <input type="text" name="desired_position" value="{{ cv.desired_position }}" required><br>
+                        <div class="field">
+                            <label class="label" for="observations">Observações:</label>
+                            <div class="control"><textarea class="textarea is-small" name="observations">{{ cv.observations }}</textarea></div>
+                        </div>
 
-        <label for="observations">Observações:</label>
-        <textarea name="observations">{{ cv.observations }}</textarea><br>
+                        <input class="input" type="hidden" name="ip_address" value="{{ ip_address }}">
 
-        <label for="cv_file">Arquivo do CV:</label>
-        <input type="file" name="cv_file" accept=".pdf,.doc,.docx"><br>
-
-        <input type="hidden" name="ip_address" value="{{ ip_address }}">
-
-        <button type="submit" class="btn btn-primary">Atualizar currículo</button>
-
-    </form>
+                        <div class="field is-grouped is-grouped-right mt-3">
+                            <div class="control">
+                                <button type="submit" class="button is-link is-medium">Atualizar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
 {% endblock content %}
