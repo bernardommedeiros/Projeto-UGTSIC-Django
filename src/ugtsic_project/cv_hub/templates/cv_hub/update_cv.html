@@ -21,8 +21,10 @@
                             <div class="control"><input class="input" type="text" name="phone" value="{{ cv.phone }}" required></div>
                         </div>
 
-                        <label class="label" for="desired_position">Cargo Desejado:</label>
-                        <input class="input" type="text" name="desired_position" value="{{ cv.desired_position }}" required><br>
+                        <div class="field">
+                            <label class="label" for="desired_position">Cargo Desejado:</label>
+                            <input class="input" type="text" name="desired_position" value="{{ cv.desired_position }}" required><br>
+                        </div>
 
                         <div class="field">
                             <label class="label" for="education">Escolaridade:</label>
@@ -37,10 +39,11 @@
                                 </div>
                             </div>
                           
-                          <label for="cv_file">Arquivo do CV:</label>
-                          <input type="file" name="cv_file" accept=".pdf,.doc,.docx"><br>
+                          <div class="field mt-2">
+                              <label class="label" for="cv_file">Arquivo do CV:</label>
+                              <div class="control"><input class="input" type="file" name="cv_file" accept=".pdf,.doc,.docx"></div>
+                          </div>
 
-                        <div class="field">
                             <label class="label" for="observations">Observações:</label>
                             <div class="control"><textarea class="textarea is-small" name="observations">{{ cv.observations }}</textarea></div>
                         </div>
