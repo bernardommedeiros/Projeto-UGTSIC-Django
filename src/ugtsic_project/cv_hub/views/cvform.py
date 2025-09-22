@@ -23,15 +23,14 @@ class CVCreateView(LoginRequiredMixin, View):
 
         email = EmailMessage(
             subject='UGTSIC CV HUB - Nova inscrição',
-            message=message_html,
+            body=message_html,
             from_email='bernardo.moura@escolar.ifrn.edu.br',
-            recipient_list=['bernardo181105@gmail.com'],
-            fail_silently=False,
+            to=['bernardo181105@gmail.com'],
         )
+        uploaded_file = files.get('cv_file')  
 
-        if cv.cv_file:
-            email.attach(cv.cv_file.name, cv.cv_file.read(), cv.cv_file.content_type)
-        email.send(fail_silently=False)
+        if uploaded_file:
+            email.attach(uploaded_file.name, uploaded_file.read(), uploaded_file.content_type)
 
         return redirect('home_page')
 
