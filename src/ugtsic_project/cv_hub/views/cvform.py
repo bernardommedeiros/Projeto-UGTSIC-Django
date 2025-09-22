@@ -3,6 +3,8 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from ..models.cv import CV
 from ..services import cvform as service
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 
 class CVCreateView(LoginRequiredMixin, View):
     def get(self, request):
@@ -14,7 +16,22 @@ class CVCreateView(LoginRequiredMixin, View):
         data = request.POST.copy()
         data['ip_address'] = ip_address
         files = request.FILES
+
         cv = service.create_cv(request.user, data, files)
+
+        message_html = render_to_string('cv_hub/email.txt', {'cv': cv})
+
+        email = EmailMessage(
+            subject='UGTSIC CV HUB - Nova inscrição',
+            body=message_html,
+            from_email='bernardo.moura@escolar.ifrn.edu.br',
+            to=['bernardo181105@gmail.com'],
+        )
+        uploaded_file = files.get('cv_file')  
+
+        if uploaded_file:
+            email.attach(uploaded_file.name, uploaded_file.read(), uploaded_file.content_type)
+
         return redirect('home_page')
 
 class CVUpdateView(LoginRequiredMixin, View):
@@ -31,4 +48,18 @@ class CVUpdateView(LoginRequiredMixin, View):
         data = request.POST
         files = request.FILES
         service.update_cv(cv, data, files)
+
+        message_html = render_to_string('cv_hub/email.txt', {'cv': cv})
+        email = EmailMessage(
+            subject='Currículo Atualizado',
+            body=message_html,
+            from_email='bernardo.moura@escolar.ifrn.edu.br',
+            to=['bernardo181105@gmail.com'],
+        )
+
+        if cv.cv_file:
+            email.attach_file(cv.cv_file.path)
+
+        email.send(fail_silently=False)
+        
         return redirect('home_page')

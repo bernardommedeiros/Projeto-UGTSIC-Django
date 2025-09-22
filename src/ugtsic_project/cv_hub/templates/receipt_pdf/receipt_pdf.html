@@ -1,16 +1,84 @@
-{% extends 'style_base/style_base.html' %}
+{% extends 'style_base/auth_base.html' %}
 {% block content %}
-    <h1>Comprovante de registro</h1>
-    <p>Aqui esta o documento que indica sua inscrição:</p>
-    <ul>
-        <li><strong>Nome Completo:</strong> {{ cv.full_name }}</li>
-        <li><strong>E-mail:</strong> {{ cv.email }}</li>
-        <li><strong>Telefone:</strong> {{ cv.phone }}</li>
-        <li><strong>Escolaridade:</strong> {{ cv.education }}</li>
-        <li><strong>Cargo Desejado:</strong> {{ cv.desired_position }}</li>
-        <li><strong>Observações:</strong> {{ cv.observations }}</li>
-        <li><strong>Endereço IP:</strong> {{ cv.ip_address }}</li>
-    </ul>
-    <br>
-    <p>Seu currículo foi recebido com sucesso.</p>
+
+    <section class="section">
+    <div class="container">
+        <div class="columns is-centered">
+        <div class="column is-10">
+            <div class="box" role="article" aria-labelledby="receipt-title">
+            <div class="level">
+                <div class="level-left">
+                <div>
+                    <h1 id="receipt-title" class="title is-4">Comprovante de Registro</h1>
+                    <p class="subtitle is-6">Documento que confirma sua inscrição</p>
+                </div>
+                </div>
+                <div class="level-right has-text-right">
+                <p class="is-size-7 has-text-grey">
+                    <strong>Data:</strong> {{ cv.created_at|date:"d/m/Y H:i" }}<br>
+                    <strong>ID:</strong> {{ cv.id }}
+                </p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="content">
+                <div class="columns is-multiline">
+                <div class="column is-6">
+                    <dl>
+                    <dt class="has-text-weight-semibold">Nome Completo</dt>
+                    <dd>{{ cv.full_name }}</dd>
+
+                    <dt class="has-text-weight-semibold">E-mail</dt>
+                    <dd><a href="mailto:{{ cv.email }}">{{ cv.email }}</a></dd>
+
+                    <dt class="has-text-weight-semibold">Telefone</dt>
+                    <dd>{{ cv.phone }}</dd>
+                    </dl>
+                </div>
+
+                <div class="column is-6">
+                    <dl>
+                    <dt class="has-text-weight-semibold">Escolaridade</dt>
+                    <dd>{{ cv.education_level }}</dd>
+
+                    <dt class="has-text-weight-semibold">Cargo Desejado</dt>
+                    <dd>{{ cv.desired_position }}</dd>
+
+                    <dt class="has-text-weight-semibold">Endereço IP</dt>
+                    <dd><code>{{ cv.ip_address }}</code></dd>
+                    </dl>
+                </div>
+
+                <div class="column is-12 mt-2">
+                    <dt class="has-text-weight-semibold has-background-grey-lighter">Observações</dt>
+                    <div class="box is-size-7">
+                    {% if cv.observations %}
+                        {{ cv.observations|linebreaksbr }}
+                    {% else %}
+                        <span class="has-text-grey-lighter">Nenhuma observação fornecida.</span>
+                    {% endif %}
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <div class="level">
+                <div class="level-right">
+                <p class="is-size-7 has-text-grey">
+                    Recebemos seu currículo com sucesso.
+                </p>
+            </div>
+            </div>
+            </div>
+
+            <p class="is-size-7 has-text-grey has-text-centered mt-2">
+            Este comprovante é gerado automaticamente pelo sistema — guarde para seus registros.
+            </p>
+        </div>
+        </div>
+    </div>
+    </section>
+
 {% endblock content %}
