@@ -21,6 +21,7 @@ A plataforma é ideal para:
 * 📎 Autenticação de usuários;
 * 🔍 Painel administrativo com todos os currículos da plataforma para o superusuário credenciado;
 * 🧩 Formulário para criar currículo;
+* 🛠 Edição do currículo atual;
 * 🌐 Envio automático dos dados dos candidatos para o email da empresa;
 * 📥 Upload de comprovante de matrícula da sua candidatura;
 * 📱 Interface totalmente **responsiva com Bulma CSS**;
@@ -62,7 +63,7 @@ docker compose build
 ### 3. Chaves de ambiente
 ```bash
 crie um arquivo .env
-copie e cole o arquivo .env_example adicionando as varíaveis necessárias
+copie e cole o arquivo .env_example
 ```
 
 ### 3. Subir os serviços
@@ -81,10 +82,8 @@ docker exec -it web python manage.py createsuperuser
 ```
 
 ### 2. Teste envio de Email
-<p> Acesse esse caminho dentro do sistemas e adicione outros emails em "TO=[]" nas classes <b>CVCreateView</b> e <b>CVUpdateView</b> -> linhas 28 e 57 do arquivo respectivamente, para as informações do formulário chegarem em seu e-mail</p>
-
 ```bash
-cd src/ugtsic_project/cv_hub/cvform.py
+em .env altere EMAIL_RECEIVER pelo seu e-mail
 ```
 
 ## 📝 Licença
