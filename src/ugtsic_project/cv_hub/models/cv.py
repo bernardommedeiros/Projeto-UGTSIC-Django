@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.conf import settings
+import re
 
 class CV(models.Model):
     EDUCATION = [
@@ -33,7 +34,7 @@ class CV(models.Model):
     def clean(self):
         errors = {}
 
-        if self.arquivo:
+        if self.cv_file:
             ext = os.path.splitext(self.cv_file.name)[1].lower()
             valid_extensions = [".doc", ".docx", ".pdf"]
             if ext not in valid_extensions:
@@ -43,10 +44,13 @@ class CV(models.Model):
             if self.cv_file.size > 1024 * 1024:  # 1MB
                 errors["cv_file"] = "O tamanho máximo permitido é 1MB."
 
+            if self.phone and not re.match(r'^([0-9]){10,20}$', self.phone):
+                errors['phone'] = "Número de telefone inválido"
+
         if errors:
             raise ValidationError(errors)
 
     def __str__(self):
-        return f"{self.user_id.username} - {self.email}"
+        return f"{self.full_name} - {self.email}"
         
      
