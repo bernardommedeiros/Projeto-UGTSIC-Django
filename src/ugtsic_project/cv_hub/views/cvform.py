@@ -5,6 +5,8 @@ from ..models.cv import CV
 from ..services import cvform as service
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+import os
+
 
 class CVCreateView(LoginRequiredMixin, View):
     def get(self, request):
@@ -21,11 +23,13 @@ class CVCreateView(LoginRequiredMixin, View):
 
         message_html = render_to_string('cv_hub/email.txt', {'cv': cv})
 
+        receivers=list(os.getenv('EMAIL_RECEIVER'))
+
         email = EmailMessage(
             subject='UGTSIC CV HUB - Nova inscrição',
             body=message_html,
-            from_email='bernardo.moura@escolar.ifrn.edu.br',
-            to=['bernardo181105@gmail.com'],
+            from_email='rhestagio57@gmail.com',
+            to=receivers,
         )
         uploaded_file = files.get('cv_file')  
 
@@ -50,11 +54,15 @@ class CVUpdateView(LoginRequiredMixin, View):
         service.update_cv(cv, data, files)
 
         message_html = render_to_string('cv_hub/email.txt', {'cv': cv})
+
+        receivers=os.getenv('EMAIL_RECEIVER').split('-')
+
+
         email = EmailMessage(
             subject='Currículo Atualizado',
             body=message_html,
-            from_email='bernardo.moura@escolar.ifrn.edu.br',
-            to=['bernardo181105@gmail.com'],
+            from_email='rhestagio57@gmail.com',
+            to=receivers,
         )
 
         if cv.cv_file:

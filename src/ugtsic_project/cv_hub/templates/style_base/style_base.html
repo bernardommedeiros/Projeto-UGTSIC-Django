@@ -34,6 +34,17 @@
     {% endblock content %}
   </main>
 
+  {% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const phoneInput = document.querySelector('input[name="phone"]');
+
+    phoneInput.addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, ''); // Remove tudo que não for número
+    });
+});
+</script>
+{% endblock scripts %}
 
 </body>
 </html>
